@@ -20,6 +20,10 @@ Run this container with the following environment variables:
 * `RANCHER_ACCESS_KEY`
 * `RANCHER_SECRET_KEY`
 
+```bash
+$ docker run -d -e AWS_REGION=us-east-1 -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e RANCHER_URL=http://rancher.mydomain.com -e RANCHER_ACCESS_KEY=$RANCHER_ACCESS_KEY -e RANCHER_SECRET_KEY=$RANCHER_SECRET_KEY objectpartners/rancher-ecr-credentials:latest
+```
+
 The AWS credentials must correspond to an IAM user that has permissions to call the ECR `GetToken` API.
 The application then parses the resulting response to retrieve the ECR registry URL, username, and password.
 The returned registry URL, is used to discover the corresponding registry in Rancher.

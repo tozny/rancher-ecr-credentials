@@ -27,9 +27,9 @@ type Rancher struct {
 
 func main() {
 	vargs := Rancher{
-		URL:          os.Getenv("RANCHER_URL"),
-		AccessKey:    os.Getenv("RANCHER_ACCESS_KEY"),
-		SecretKey:    os.Getenv("RANCHER_SECRET_KEY"),
+		URL:          os.Getenv("CATTLE_URL"),
+		AccessKey:    os.Getenv("CATTLE_ACCESS_KEY"),
+		SecretKey:    os.Getenv("CATTLE_SECRET_KEY"),
 		AWSAccessKey: os.Getenv("AWS_ACCESS_KEY_ID"),
 		AWSSecretKey: os.Getenv("AWS_SECRET_ACCESS_KEY"),
 		AWSRegion:    os.Getenv("AWS_REGION"),

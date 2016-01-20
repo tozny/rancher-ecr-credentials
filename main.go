@@ -118,9 +118,10 @@ func updateEcr(vargs Rancher) error {
 				break
 			}
 			credential := credentials.Data[0]
-			credential.PublicValue = ecrUsername
-			credential.SecretValue = ecrPassword
-			_, err = rancher.RegistryCredential.ActionUpdate(&credential)
+			_, err = rancher.RegistryCredential.Update(&credential, &client.RegistryCredential{
+				PublicValue: ecrUsername,
+				SecretValue: ecrPassword,
+			})
 			if err != nil {
 				fmt.Printf("Failed to update registry credential %s, %s\n", credential.Id, err)
 			} else {

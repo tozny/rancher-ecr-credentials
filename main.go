@@ -16,6 +16,7 @@ import (
 	"github.com/rancher/go-rancher/client"
 )
 
+// Rancher holds the configuration parameters
 type Rancher struct {
 	URL          string
 	AccessKey    string
@@ -86,7 +87,7 @@ func updateEcr(vargs Rancher) error {
 
 	ecrUsername := authTokens[0]
 	ecrPassword := authTokens[1]
-	ecrUrl := registryURL.Host
+	ecrURL := registryURL.Host
 	rancher, err := client.NewRancherClient(&client.ClientOpts{
 		Url:       vargs.URL,
 		AccessKey: vargs.AccessKey,
@@ -103,7 +104,12 @@ func updateEcr(vargs Rancher) error {
 		return err
 	}
 	for _, registry := range registries.Data {
-		if registry.ServerAddress == ecrUrl {
+		serverAddress, err := url.Parse(registry.ServerAddress)
+		if err != nil {
+			fmt.Printf("Failed to parse configured registry URL %s", registry.ServerAddress)
+			break
+		}
+		if serverAddress.Host == ecrURL {
 			credentials, err := rancher.RegistryCredential.List(&client.ListOpts{
 				Filters: map[string]interface{}{
 					"registryId": registry.Id,
@@ -129,6 +135,7 @@ func updateEcr(vargs Rancher) error {
 			}
 			break
 		}
+		fmt.Printf("Failed to find configured registry to update for URL %s", ecrURL)
 	}
 	return nil
 }

@@ -131,7 +131,7 @@ func updateEcr(vargs Rancher) error {
 			if err != nil {
 				fmt.Printf("Failed to update registry credential %s, %s\n", credential.Id, err)
 			} else {
-				fmt.Printf("Successfuly update credentials %s for registry %s\n", credential.Id, registry.Id)
+				fmt.Printf("Successfully updated credentials %s for registry %s\n", credential.Id, registry.Id)
 			}
 			break
 		}

@@ -96,7 +96,7 @@ func updateEcr(vargs Rancher) error {
 
 	if err != nil {
 		fmt.Printf("Failed to create rancher client: %s\n", err)
-		os.Exit(1)
+		return err
 	}
 	registries, err := rancher.Registry.List(&client.ListOpts{})
 	if err != nil {

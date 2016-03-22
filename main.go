@@ -104,6 +104,7 @@ func updateEcr(vargs Rancher) error {
 		return err
 	}
 	for _, registry := range registries.Data {
+		fmt.Printf("Checking: %s\n", registry.ServerAddress)
 		serverAddress, err := url.Parse(registry.ServerAddress)
 		if err != nil {
 			fmt.Printf("Failed to parse configured registry URL %s\n", registry.ServerAddress)

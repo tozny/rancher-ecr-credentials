@@ -110,8 +110,18 @@ func updateEcr(vargs Rancher) error {
 			fmt.Printf("Failed to parse configured registry URL %s\n", registry.ServerAddress)
 			break
 		}
-		fmt.Printf("Checking registry: %s against: %s\n", serverAddress.Host, ecrURL)
-		if serverAddress.Host == ecrURL {
+		fmt.Printf("Scheme: %s\n", serverAddress.Scheme)
+		fmt.Printf("Host: %s\n", serverAddress.Host)
+		fmt.Printf("Path: %s\n", serverAddress.Path)
+		fmt.Printf("RawPath: %s\n", serverAddress.RawPath)
+		fmt.Printf("RawQuery: %s\n", serverAddress.RawQuery)
+		fmt.Printf("Fragment: %s\n", serverAddress.Fragment)
+		registryHost := serverAddress.Host
+		if registryHost == "" {
+			registryHost = serverAddress.Path
+		}
+		fmt.Printf("Checking registry: %s against: %s\n", registryHost, ecrURL)
+		if registryHost == ecrURL {
 			credentials, err := rancher.RegistryCredential.List(&client.ListOpts{
 				Filters: map[string]interface{}{
 					"registryId": registry.Id,

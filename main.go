@@ -52,7 +52,7 @@ func main() {
 }
 
 func updateEcr(vargs Rancher) error {
-	fmt.Printf("[%s] Updating ECR Credentials\n", time.Now())
+	fmt.Printf("Updating ECR Credentials\n")
 	ecrClient := ecr.New(session.New(&aws.Config{
 		Region:      aws.String(vargs.AWSRegion),
 		Credentials: credentials.NewStaticCredentials(vargs.AWSAccessKey, vargs.AWSSecretKey, ""),
@@ -110,12 +110,6 @@ func updateEcr(vargs Rancher) error {
 			fmt.Printf("Failed to parse configured registry URL %s\n", registry.ServerAddress)
 			break
 		}
-		fmt.Printf("Scheme: %s\n", serverAddress.Scheme)
-		fmt.Printf("Host: %s\n", serverAddress.Host)
-		fmt.Printf("Path: %s\n", serverAddress.Path)
-		fmt.Printf("RawPath: %s\n", serverAddress.RawPath)
-		fmt.Printf("RawQuery: %s\n", serverAddress.RawQuery)
-		fmt.Printf("Fragment: %s\n", serverAddress.Fragment)
 		registryHost := serverAddress.Host
 		if registryHost == "" {
 			registryHost = serverAddress.Path
@@ -143,7 +137,7 @@ func updateEcr(vargs Rancher) error {
 			if err != nil {
 				fmt.Printf("Failed to update registry credential %s, %s\n", credential.Id, err)
 			} else {
-				fmt.Printf("Successfully updated credentials %s for registry %s\n", credential.Id, registry.Id)
+				fmt.Printf("Successfully updated credentials %s for registry %s; registry address: %s\n", credential.Id, registry.Id, registryHost)
 			}
 			break
 		}

@@ -12,10 +12,18 @@ Rancher only supports registries that authenticate with a username and password.
 
 ## How to use
 
-Run this container with the following environment variables:
+In order to authenticate with AWS ECR, this Docker container uses the default
+chain of [credential providers](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#config-settings-and-precedence).
+
+The easiest way to run it is to feed in the following environment variables:
+
 * `AWS_REGION` - the AWS region of the ECR registry
 * `AWS_ACCESS_KEY_ID`
 * `AWS_SECRET_ACCESS_KEY`
+
+If you're using an IAM instance profile, then you only need to specify the region,
+with the `AWS_REGION` environment variable, and the credentials will be
+automatically negotiated.
 
 Add the following labels to the service in Rancher:
 * `io.rancher.container.create_agent: true`

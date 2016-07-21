@@ -9,7 +9,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/ecr"
 	"github.com/rancher/go-rancher/client"
@@ -45,7 +44,7 @@ func main() {
 
 func updateEcr(vargs Rancher) error {
 	fmt.Printf("Updating ECR Credentials\n")
-	ecrClient := ecr.New(session.New(), &aws.Config{})
+	ecrClient := ecr.New(session.New())
 
 	resp, err := ecrClient.GetAuthorizationToken(&ecr.GetAuthorizationTokenInput{})
 	if err != nil {

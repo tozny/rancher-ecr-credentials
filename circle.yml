@@ -8,10 +8,10 @@ dependencies:
   override:
     - go get -t -d -v ./...
     - go build -v:
-      environment:
-        GOOS: linux
-        GOARCH: amd64
-        CGO_ENABLED: 0
+        environment:
+          GOOS: linux
+          GOARCH: amd64
+          CGO_ENABLED: 0
   post:
     - cp rancher-ecr-credentials $CIRCLE_ARTIFACTS
     - docker info

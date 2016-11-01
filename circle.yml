@@ -1,25 +1,34 @@
 machine:
+  environment:
+    GOOS: linux
+    GOARCH: amd64
+    CGO_ENABLED: 0
   services:
     - docker
+
 dependencies:
   pre:
     - go get -u github.com/kardianos/govendor
-  override:
+  post:
     - cp rancher-ecr-credentials $CIRCLE_ARTIFACTS
-    - docker pull objectpartners/rancher-ecr-credentials:latest
     - docker info
+    - docker pull objectpartners/rancher-ecr-credentials:latest
     - scripts/build.sh objectpartners/rancher-ecr-credentials
+
 test:
   override:
     - govendor test -v +local
-    
+
 deployment:
   master:
     branch: master
+    owner: objectpartners
     commands:
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - scripts/push.sh objectpartners/rancher-ecr-credentials
   release:
     tag: /[0-9]+(\.[0-9]+)*/
     owner: objectpartners
     commands:
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - scripts/tag_and_push.sh objectpartners/rancher-ecr-credentials $CIRCLE_TAG

@@ -1,0 +1,4 @@
+dependencies:
+  override:
+    - go get -u github.com/kardianos/govendor
+    - go build -v

@@ -1,17 +1,17 @@
 machine:
+  environment:
+    GOOS: linux
+    GOARCH: amd64
+    CGO_ENABLED: 0
   services:
     - docker
 
 dependencies:
   pre:
-    - go get -u github.com/kardianos/govendor
-  override:
-    - go get -t -d -v ./...
-    - go build -v:
+    - go get -u github.com/kardianos/govendor:
         environment:
-          GOOS: linux
-          GOARCH: amd64
-          CGO_ENABLED: 0
+          GOOS:
+          GOARCH:
   post:
     - cp rancher-ecr-credentials $CIRCLE_ARTIFACTS
     - docker info

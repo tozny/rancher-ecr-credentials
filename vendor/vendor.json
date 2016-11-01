@@ -1,0 +1,25 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "AFcUmKIbqHEKLdNMYB8ubtT+FHA=",
+			"path": "github.com/aws/aws-sdk-go/aws/session",
+			"revision": "32cdc88aa5cd2ba4afa049da884aaf9a3d103ef4",
+			"revisionTime": "2016-10-21T00:22:39Z"
+		},
+		{
+			"checksumSHA1": "vIGJIbBE4GoNAsded9sC1R9oR9E=",
+			"path": "github.com/aws/aws-sdk-go/service/ecr",
+			"revision": "32cdc88aa5cd2ba4afa049da884aaf9a3d103ef4",
+			"revisionTime": "2016-10-21T00:22:39Z"
+		},
+		{
+			"checksumSHA1": "kJk7J/hnV7f58DL8/wVIYawVg/Y=",
+			"path": "github.com/rancher/go-rancher/client",
+			"revision": "42edbb235a13e8739fe1354f01fb035172f0ed5f",
+			"revisionTime": "2016-01-16T05:45:59Z"
+		}
+	],
+	"rootPath": "github.com/objectpartners/rancher-ecr-credentials"
+}

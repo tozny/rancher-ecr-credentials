@@ -1,6 +1,25 @@
+machine:
+  services:
+    - docker
 dependencies:
   pre:
     - go get -u github.com/kardianos/govendor
+  override:
+    - cp rancher-ecr-credentials $CIRCLE_ARTIFACTS
+    - docker pull objectpartners/rancher-ecr-credentials:latest
+    - docker info
+    - scripts/build.sh objectpartners/rancher-ecr-credentials
 test:
   override:
     - govendor test -v +local
+    
+deployment:
+  master:
+    branch: master
+    commands:
+      - scripts/push.sh objectpartners/rancher-ecr-credentials
+  release:
+    tag: /[0-9]+(\.[0-9]+)*/
+    owner: objectpartners
+    commands:
+      - scripts/tag_and_push.sh objectpartners/rancher-ecr-credentials $CIRCLE_TAG

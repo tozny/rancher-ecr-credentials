@@ -1,4 +1,6 @@
 dependencies:
-  override:
+  pre:
     - go get -u github.com/kardianos/govendor
-    - go build -v
+test:
+  override:
+    - govendor test -v +local

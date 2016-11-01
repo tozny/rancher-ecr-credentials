@@ -5,220 +5,294 @@
 		{
 			"checksumSHA1": "DUBm1zF2dAtPldkVNf1XM5ci0dQ=",
 			"comment": "v1.1.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/aws/aws-sdk-go/aws",
 			"path": "github.com/aws/aws-sdk-go/aws",
-			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6"
+			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6",
+			"revisionTime": "2016-02-26T00:26:16Z"
 		},
 		{
 			"checksumSHA1": "3BvNMQtfLf5cIhEWs7jJRw3NMBE=",
 			"comment": "v1.1.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/aws/aws-sdk-go/aws/awserr",
 			"path": "github.com/aws/aws-sdk-go/aws/awserr",
-			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6"
+			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6",
+			"revisionTime": "2016-02-26T00:26:16Z"
 		},
 		{
 			"checksumSHA1": "MoxolxrlsmtDri7ndvx5gkXI2hU=",
 			"comment": "v1.1.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/aws/aws-sdk-go/aws/awsutil",
 			"path": "github.com/aws/aws-sdk-go/aws/awsutil",
-			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6"
+			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6",
+			"revisionTime": "2016-02-26T00:26:16Z"
 		},
 		{
 			"checksumSHA1": "tPI1ycaBQugYUmuI1m+I+OrYCYY=",
 			"comment": "v1.1.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/aws/aws-sdk-go/aws/client",
 			"path": "github.com/aws/aws-sdk-go/aws/client",
-			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6"
+			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6",
+			"revisionTime": "2016-02-26T00:26:16Z"
 		},
 		{
 			"checksumSHA1": "ieAJ+Cvp/PKv1LpUEnUXpc3OI6E=",
 			"comment": "v1.1.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/aws/aws-sdk-go/aws/client/metadata",
 			"path": "github.com/aws/aws-sdk-go/aws/client/metadata",
-			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6"
+			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6",
+			"revisionTime": "2016-02-26T00:26:16Z"
 		},
 		{
 			"checksumSHA1": "gZ2WU445sFINoBFoEvgvRsa6r/0=",
 			"comment": "v1.1.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/aws/aws-sdk-go/aws/corehandlers",
 			"path": "github.com/aws/aws-sdk-go/aws/corehandlers",
-			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6"
+			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6",
+			"revisionTime": "2016-02-26T00:26:16Z"
 		},
 		{
 			"checksumSHA1": "t+StYYU8PtTVNj8VEni4XV7bBJQ=",
 			"comment": "v1.1.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/aws/aws-sdk-go/aws/credentials",
 			"path": "github.com/aws/aws-sdk-go/aws/credentials",
-			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6"
+			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6",
+			"revisionTime": "2016-02-26T00:26:16Z"
 		},
 		{
 			"checksumSHA1": "KQiUK/zr3mqnAXD7x/X55/iNme0=",
 			"comment": "v1.1.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/aws/aws-sdk-go/aws/credentials/ec2rolecreds",
 			"path": "github.com/aws/aws-sdk-go/aws/credentials/ec2rolecreds",
-			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6"
+			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6",
+			"revisionTime": "2016-02-26T00:26:16Z"
 		},
 		{
 			"checksumSHA1": "f5JN6QPKJuwljM3PZsYkhVoFt0o=",
 			"comment": "v1.1.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/aws/aws-sdk-go/aws/credentials/stscreds",
 			"path": "github.com/aws/aws-sdk-go/aws/credentials/stscreds",
-			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6"
+			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6",
+			"revisionTime": "2016-02-26T00:26:16Z"
 		},
 		{
 			"checksumSHA1": "+bxLAbdUZ2SeCxImaMZkzZw+55E=",
 			"comment": "v1.1.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/aws/aws-sdk-go/aws/defaults",
 			"path": "github.com/aws/aws-sdk-go/aws/defaults",
-			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6"
+			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6",
+			"revisionTime": "2016-02-26T00:26:16Z"
 		},
 		{
 			"checksumSHA1": "PTESkBneD8/kAcI9QMRM3srYUI0=",
 			"comment": "v1.1.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/aws/aws-sdk-go/aws/ec2metadata",
 			"path": "github.com/aws/aws-sdk-go/aws/ec2metadata",
-			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6"
+			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6",
+			"revisionTime": "2016-02-26T00:26:16Z"
 		},
 		{
 			"checksumSHA1": "3lqab0xjKm1Ui+VgkH9SD4SbdAU=",
 			"comment": "v1.1.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/aws/aws-sdk-go/aws/request",
 			"path": "github.com/aws/aws-sdk-go/aws/request",
-			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6"
+			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6",
+			"revisionTime": "2016-02-26T00:26:16Z"
 		},
 		{
 			"checksumSHA1": "vDCy4q7PoOTy5IFejfV8WlWvdew=",
 			"comment": "v1.1.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/aws/aws-sdk-go/aws/session",
 			"path": "github.com/aws/aws-sdk-go/aws/session",
-			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6"
+			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6",
+			"revisionTime": "2016-02-26T00:26:16Z"
 		},
 		{
 			"checksumSHA1": "/51F+8nLshTdKTiIFxy31wwV02E=",
 			"comment": "v1.1.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/aws/aws-sdk-go/awstesting",
 			"path": "github.com/aws/aws-sdk-go/awstesting",
-			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6"
+			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6",
+			"revisionTime": "2016-02-26T00:26:16Z"
 		},
 		{
 			"checksumSHA1": "EH5bYi2J/M/U8nmx+3Ewai/NCzc=",
 			"comment": "v1.1.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/aws/aws-sdk-go/awstesting/unit",
 			"path": "github.com/aws/aws-sdk-go/awstesting/unit",
-			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6"
+			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6",
+			"revisionTime": "2016-02-26T00:26:16Z"
 		},
 		{
 			"checksumSHA1": "mSSdUM+99LCC1Qz6YyPYW0YJfzg=",
 			"comment": "v1.1.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/aws/aws-sdk-go/private/endpoints",
 			"path": "github.com/aws/aws-sdk-go/private/endpoints",
-			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6"
+			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6",
+			"revisionTime": "2016-02-26T00:26:16Z"
 		},
 		{
 			"checksumSHA1": "wk7EyvDaHwb5qqoOP/4d3cV0708=",
 			"comment": "v1.1.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/aws/aws-sdk-go/private/protocol",
 			"path": "github.com/aws/aws-sdk-go/private/protocol",
-			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6"
+			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6",
+			"revisionTime": "2016-02-26T00:26:16Z"
 		},
 		{
 			"checksumSHA1": "/plJ/dZ8EBpnC8ajt5BINnJQ/KY=",
 			"comment": "v1.1.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/aws/aws-sdk-go/private/protocol/ec2query",
 			"path": "github.com/aws/aws-sdk-go/private/protocol/ec2query",
-			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6"
+			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6",
+			"revisionTime": "2016-02-26T00:26:16Z"
 		},
 		{
 			"checksumSHA1": "zSYguMq6pUDxHBylsWefZhxj6fs=",
 			"comment": "v1.1.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/aws/aws-sdk-go/private/protocol/json/jsonutil",
 			"path": "github.com/aws/aws-sdk-go/private/protocol/json/jsonutil",
-			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6"
+			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6",
+			"revisionTime": "2016-02-26T00:26:16Z"
 		},
 		{
 			"checksumSHA1": "MPzz1x/qt6f2R/JW6aELbm/qT4k=",
 			"comment": "v1.1.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/aws/aws-sdk-go/private/protocol/jsonrpc",
 			"path": "github.com/aws/aws-sdk-go/private/protocol/jsonrpc",
-			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6"
+			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6",
+			"revisionTime": "2016-02-26T00:26:16Z"
 		},
 		{
 			"checksumSHA1": "99jUuVHLA/HvLa36H8qFInL2pA4=",
 			"comment": "v1.1.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/aws/aws-sdk-go/private/protocol/query",
 			"path": "github.com/aws/aws-sdk-go/private/protocol/query",
-			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6"
+			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6",
+			"revisionTime": "2016-02-26T00:26:16Z"
 		},
 		{
 			"checksumSHA1": "5xzix1R8prUyWxgLnzUQoxTsfik=",
 			"comment": "v1.1.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/aws/aws-sdk-go/private/protocol/query/queryutil",
 			"path": "github.com/aws/aws-sdk-go/private/protocol/query/queryutil",
-			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6"
+			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6",
+			"revisionTime": "2016-02-26T00:26:16Z"
 		},
 		{
 			"checksumSHA1": "VAE0nH1PLPqWqTaspM/Db6HC28s=",
 			"comment": "v1.1.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/aws/aws-sdk-go/private/protocol/rest",
 			"path": "github.com/aws/aws-sdk-go/private/protocol/rest",
-			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6"
+			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6",
+			"revisionTime": "2016-02-26T00:26:16Z"
 		},
 		{
 			"checksumSHA1": "sB2Bal1KKVrfEYIfB0gfbTZNOAM=",
 			"comment": "v1.1.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/aws/aws-sdk-go/private/protocol/restjson",
 			"path": "github.com/aws/aws-sdk-go/private/protocol/restjson",
-			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6"
+			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6",
+			"revisionTime": "2016-02-26T00:26:16Z"
 		},
 		{
 			"checksumSHA1": "ttxyyPnlmMDqX+sY10BwbwwA+jo=",
 			"comment": "v1.1.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/aws/aws-sdk-go/private/protocol/restxml",
 			"path": "github.com/aws/aws-sdk-go/private/protocol/restxml",
-			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6"
+			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6",
+			"revisionTime": "2016-02-26T00:26:16Z"
 		},
 		{
 			"checksumSHA1": "LsCIsjbzX2r3n/AhpNJvAC5ueNA=",
 			"comment": "v1.1.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/aws/aws-sdk-go/private/protocol/xml/xmlutil",
 			"path": "github.com/aws/aws-sdk-go/private/protocol/xml/xmlutil",
-			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6"
+			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6",
+			"revisionTime": "2016-02-26T00:26:16Z"
 		},
 		{
 			"checksumSHA1": "L2bf110xGGQ4+8MwLrRYfOXkOsg=",
 			"comment": "v1.1.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/aws/aws-sdk-go/private/signer/v4",
 			"path": "github.com/aws/aws-sdk-go/private/signer/v4",
-			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6"
+			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6",
+			"revisionTime": "2016-02-26T00:26:16Z"
 		},
 		{
 			"checksumSHA1": "1GiPsMTfiLsBHYxGIpxogOuovAI=",
 			"comment": "v1.1.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/aws/aws-sdk-go/service/ecr",
 			"path": "github.com/aws/aws-sdk-go/service/ecr",
-			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6"
+			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6",
+			"revisionTime": "2016-02-26T00:26:16Z"
 		},
 		{
 			"checksumSHA1": "zF072LFMCkxsN/822bYtH+asqJc=",
 			"comment": "v1.1.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/aws/aws-sdk-go/service/ecr/ecriface",
 			"path": "github.com/aws/aws-sdk-go/service/ecr/ecriface",
-			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6"
+			"revision": "aac89266a9bc98ecbf440bb675e9dc95a94d8dc6",
+			"revisionTime": "2016-02-26T00:26:16Z"
 		},
 		{
 			"checksumSHA1": "PkPgpx/FYoIJCbihlRZEp7oHG9Q=",
 			"comment": "v1.8.6",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/go-ini/ini",
 			"path": "github.com/go-ini/ini",
-			"revision": "afbd495e5aaea13597b5e14fe514ddeaa4d76fc3"
+			"revision": "afbd495e5aaea13597b5e14fe514ddeaa4d76fc3",
+			"revisionTime": "2016-01-06T10:56:16Z"
 		},
 		{
 			"checksumSHA1": "0jlRZ3K8peSwCqbqFwad+siT2pA=",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/gorilla/websocket",
 			"path": "github.com/gorilla/websocket",
-			"revision": "1551221275a7bd42978745a376b2531f791d88f3"
+			"revision": "1551221275a7bd42978745a376b2531f791d88f3",
+			"revisionTime": "2015-05-15T16:26:38Z"
 		},
 		{
 			"checksumSHA1": "ELY5zxagdKwn8FiFVQ08PFlylz4=",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/gorilla/websocket/examples/autobahn",
 			"path": "github.com/gorilla/websocket/examples/autobahn",
-			"revision": "1551221275a7bd42978745a376b2531f791d88f3"
+			"revision": "1551221275a7bd42978745a376b2531f791d88f3",
+			"revisionTime": "2015-05-15T16:26:38Z"
 		},
 		{
 			"checksumSHA1": "ORK4eeh33l45cVh3kT5D5glw+e8=",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/gorilla/websocket/examples/chat",
 			"path": "github.com/gorilla/websocket/examples/chat",
-			"revision": "1551221275a7bd42978745a376b2531f791d88f3"
+			"revision": "1551221275a7bd42978745a376b2531f791d88f3",
+			"revisionTime": "2015-05-15T16:26:38Z"
 		},
 		{
 			"checksumSHA1": "R3K4pxKJnT31vt50yYp0QO2/O94=",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/gorilla/websocket/examples/filewatch",
 			"path": "github.com/gorilla/websocket/examples/filewatch",
-			"revision": "1551221275a7bd42978745a376b2531f791d88f3"
+			"revision": "1551221275a7bd42978745a376b2531f791d88f3",
+			"revisionTime": "2015-05-15T16:26:38Z"
 		},
 		{
 			"checksumSHA1": "3/Bhy+ua/DCv2ElMD5GzOYSGN6g=",
 			"comment": "0.2.2-2-gc01cf91",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/jmespath/go-jmespath",
 			"path": "github.com/jmespath/go-jmespath",
-			"revision": "c01cf91b011868172fdcd9f41838e80c9d716264"
+			"revision": "c01cf91b011868172fdcd9f41838e80c9d716264",
+			"revisionTime": "2015-12-08T07:18:31Z"
 		},
 		{
 			"checksumSHA1": "uIIksmnhf7tRQ+nf1o1oIJhcNhw=",
 			"comment": "0.2.2-2-gc01cf91",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/jmespath/go-jmespath/fuzz",
 			"path": "github.com/jmespath/go-jmespath/fuzz",
-			"revision": "c01cf91b011868172fdcd9f41838e80c9d716264"
+			"revision": "c01cf91b011868172fdcd9f41838e80c9d716264",
+			"revisionTime": "2015-12-08T07:18:31Z"
 		},
 		{
 			"checksumSHA1": "kJk7J/hnV7f58DL8/wVIYawVg/Y=",
 			"comment": "v0.1.0-130-g42edbb2",
+			"origin": "github.com/objectpartners/rancher-ecr-credentials/vendor/github.com/rancher/go-rancher/client",
 			"path": "github.com/rancher/go-rancher/client",
-			"revision": "42edbb235a13e8739fe1354f01fb035172f0ed5f"
+			"revision": "42edbb235a13e8739fe1354f01fb035172f0ed5f",
+			"revisionTime": "2016-01-16T05:45:59Z"
 		}
 	],
 	"rootPath": "github.com/objectpartners/rancher-ecr-credentials"

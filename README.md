@@ -1,5 +1,7 @@
 # Rancher ECR Credentials Updater
 
+[![CircleCI](https://circleci.com/gh/objectpartners/rancher-ecr-credentials/tree/master.svg?style=svg)](https://circleci.com/gh/objectpartners/rancher-ecr-credentials/tree/master)
+
 This is Docker container that when executed will update the Docker registry
 credentials in Rancher for an Amazon Elastic Container Registry.
 

@@ -125,9 +125,9 @@ func updateEcr(vargs Rancher) error {
 			} else {
 				fmt.Printf("Successfully updated credentials %s for registry %s; registry address: %s\n", credential.Id, registry.Id, registryHost)
 			}
-			break
+			return nil
 		}
-		fmt.Printf("Failed to find configured registry to update for URL %s\n", ecrURL)
 	}
+	fmt.Printf("Failed to find configured registry to update for URL %s\n", ecrURL)
 	return nil
 }

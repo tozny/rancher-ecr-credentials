@@ -50,6 +50,7 @@ func updateEcr(vargs Rancher) error {
 	if err != nil {
 		return err
 	}
+	fmt.Printf("Returned from AWS GetAuthorizationToken call successfully\n")
 
 	if len(resp.AuthorizationData) < 1 {
 		return errors.New("Request did not return authorization data")
@@ -91,6 +92,7 @@ func updateEcr(vargs Rancher) error {
 		fmt.Printf("Failed to retrieve registries: %s\n", err)
 		return err
 	}
+	fmt.Printf("Looking for configured registry for host %s\n", ecrURL)
 	for _, registry := range registries.Data {
 		serverAddress, err := url.Parse(registry.ServerAddress)
 		if err != nil {

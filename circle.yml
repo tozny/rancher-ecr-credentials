@@ -5,8 +5,6 @@ machine:
 dependencies:
   pre:
     - go get -u github.com/kardianos/govendor
-  override:
-    - make build
   post:
     - cp rancher-ecr-credentials $CIRCLE_ARTIFACTS
     - docker info

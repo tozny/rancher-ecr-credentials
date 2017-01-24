@@ -9,8 +9,9 @@ general:
   build_dir: ../.go_workspace/src/$IMPORT_PATH
 
 checkout:
-  post:
+  pre:
     - rm -rf $GOPATH/src/$IMPORT_PATH
+    - mkdir -p $(dirname $GOPATH/src/$IMPORT_PATH)
     - ln -s $HOME/$CIRCLE_PROJECT_REPONAME $GOPATH/src/$IMPORT_PATH
     
 dependencies:
@@ -19,10 +20,10 @@ dependencies:
   override:
     - make build
   post:
-    - cp rancher-ecr-credentials $CIRCLE_ARTIFACTS
+    - cp $CIRCLE_PROJECT_REPONAME $CIRCLE_ARTIFACTS
     - docker info
-    - docker pull objectpartners/rancher-ecr-credentials:latest
-    - scripts/build.sh objectpartners/rancher-ecr-credentials
+    - docker pull objectpartners/$CIRCLE_PROJECT_REPONAME:latest || true
+    - scripts/build.sh objectpartners/$CIRCLE_PROJECT_REPONAME
 test:
   override:
     - make test
@@ -33,10 +34,10 @@ deployment:
     owner: objectpartners
     commands:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - scripts/push.sh objectpartners/rancher-ecr-credentials
+      - scripts/push.sh objectpartners/$CIRCLE_PROJECT_REPONAME
   release:
     tag: /[0-9]+(\.[0-9]+)*/
     owner: objectpartners
     commands:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - scripts/tag_and_push.sh objectpartners/rancher-ecr-credentials $CIRCLE_TAG
+      - scripts/tag_and_push.sh objectpartners/$CIRCLE_PROJECT_REPONAME $CIRCLE_TAG

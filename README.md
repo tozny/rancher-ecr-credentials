@@ -1,8 +1,8 @@
 # Rancher ECR Credentials Updater
 
-[![CircleCI](https://img.shields.io/circleci/project/github/objectpartners/rancher-service-updater.svg?maxAge=0)](https://circleci.com/gh/objectpartners/rancher-service-updater/tree/master)
-[![GitHub Release](https://img.shields.io/github/release/objectpartners/rancher-service-updater.svg?maxAge=0)](https://github.com/objectpartners/rancher-service-updater/releases)
-[![Apache License 2.0](https://img.shields.io/badge/license-Apache_License_2.0-blue.svg)](https://github.com/objectpartners/rancher-service-updater/blob/master/LICENSE)
+[![CircleCI](https://img.shields.io/circleci/project/github/objectpartners/rancher-ecr-credentials.svg?maxAge=0)](https://circleci.com/gh/objectpartners/rancher-ecr-credentials/tree/master)
+[![GitHub Release](https://img.shields.io/github/release/objectpartners/rancher-ecr-credentials.svg?maxAge=0)](https://github.com/objectpartners/rancher-ecr-credentials/releases)
+[![Apache License 2.0](https://img.shields.io/badge/license-Apache_License_2.0-blue.svg)](https://github.com/objectpartners/rancher-ecr-credentials/blob/master/LICENSE)
 
 This is Docker container that when executed will update the Docker registry
 credentials in Rancher for an Amazon Elastic Container Registry.

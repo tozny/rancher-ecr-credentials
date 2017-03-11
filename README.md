@@ -40,12 +40,24 @@ These labels will cause Rancher to provision an API key for this service and
 create the `CATTLE_URL`, `CATTLE_ACCESS_KEY`, and `CATTLE_SECRET_KEY`
 environment variables.
 
+## Configuring alternative ECR registries
+
+By default the updater will acquire login tokens for the default registry
+associated with the AWS account for the credentials used to access the AWS API.
+This can be modified by providing the `AWS_ECR_REGISTRY_IDS` environment
+variable to the container.
+The variable should contain a comma (`,`) separated listed of account IDs to
+acquire tokens for.
+When specified, only the accounts provided will be looked up.
+Each account will return an authorization token that will be used to update
+and associated registry in Rancher.
+
 ## Running container outside of Rancher
 
 If you are running this container outside of a Rancher managed environment, then
 you must provide the following environment variables in additional to the ones
 above.
-* `CATTLE_URL` - the url of the Rancher server to update
+* `CATTLE_URL`
 * `CATTLE_ACCESS_KEY`
 * `CATTLE_SECRET_KEY`
 

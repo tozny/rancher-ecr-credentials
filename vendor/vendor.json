@@ -147,6 +147,12 @@
 			"revisionTime": "2016-12-30T00:33:20Z"
 		},
 		{
+			"checksumSHA1": "zF072LFMCkxsN/822bYtH+asqJc=",
+			"path": "github.com/aws/aws-sdk-go/service/ecr/ecriface",
+			"revision": "13a12060f716145019378a10e2806c174356b857",
+			"revisionTime": "2016-03-01T22:14:50Z"
+		},
+		{
 			"checksumSHA1": "kZvAnT2KFYZBxgUHXzV0kv3KccA=",
 			"path": "github.com/aws/aws-sdk-go/service/sts",
 			"revision": "36670f6ab1769ad77fa5f7e2c194398733503635",

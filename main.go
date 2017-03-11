@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/ecr"
+	"github.com/aws/aws-sdk-go/service/ecr/ecriface"
 	"github.com/rancher/go-rancher/client"
 )
 
@@ -48,23 +49,25 @@ func main() {
 
 	go healthcheck()
 
-	r.updateEcr()
+	r.updateEcr(ecr.New(session.New()), r.client.Registry, r.client.RegistryCredential)
 	ticker := time.NewTicker(6 * time.Hour)
 	for {
 		<-ticker.C
-		r.updateEcr()
+		r.updateEcr(ecr.New(session.New()), r.client.Registry, r.client.RegistryCredential)
 	}
 }
 
-func (r *Rancher) updateEcr() {
+func (r *Rancher) updateEcr(
+	svc ecriface.ECRAPI,
+	registryClient client.RegistryOperations,
+	registryCredentialClient client.RegistryCredentialOperations) {
 	log.Println("Updating ECR Credentials")
-	ecrClient := ecr.New(session.New())
 
 	request := &ecr.GetAuthorizationTokenInput{}
 	if len(r.RegistryIds) > 0 {
 		request = &ecr.GetAuthorizationTokenInput{RegistryIds: aws.StringSlice(r.RegistryIds)}
 	}
-	resp, err := ecrClient.GetAuthorizationToken(request)
+	resp, err := svc.GetAuthorizationToken(request)
 	if err != nil {
 		log.Println(err)
 		return
@@ -77,11 +80,15 @@ func (r *Rancher) updateEcr() {
 	}
 
 	for _, data := range resp.AuthorizationData {
-		r.processToken(data)
+		r.processToken(data, registryClient, registryCredentialClient)
 	}
 }
 
-func (r *Rancher) processToken(data *ecr.AuthorizationData) {
+func (r *Rancher) processToken(
+	data *ecr.AuthorizationData,
+	registryClient client.RegistryOperations,
+	registryCredentialClient client.RegistryCredentialOperations) {
+
 	bytes, err := base64.StdEncoding.DecodeString(*data.AuthorizationToken)
 	if err != nil {
 		log.Printf("Error decoding authorization token: %s\n", err)
@@ -109,7 +116,7 @@ func (r *Rancher) processToken(data *ecr.AuthorizationData) {
 		log.Printf("Failed to create rancher client: %s\n", err)
 		return
 	}
-	registries, err := r.client.Registry.List(&client.ListOpts{})
+	registries, err := registryClient.List(&client.ListOpts{})
 	if err != nil {
 		log.Printf("Failed to retrieve registries: %s\n", err)
 		return
@@ -126,7 +133,7 @@ func (r *Rancher) processToken(data *ecr.AuthorizationData) {
 			registryHost = serverAddress.Path
 		}
 		if registryHost == ecrURL {
-			credentials, err := r.client.RegistryCredential.List(&client.ListOpts{
+			credentials, err := registryCredentialClient.List(&client.ListOpts{
 				Filters: map[string]interface{}{
 					"registryId": registry.Id,
 				},
@@ -140,7 +147,7 @@ func (r *Rancher) processToken(data *ecr.AuthorizationData) {
 				break
 			}
 			credential := credentials.Data[0]
-			_, err = r.client.RegistryCredential.Update(&credential, &client.RegistryCredential{
+			_, err = registryCredentialClient.Update(&credential, &client.RegistryCredential{
 				PublicValue: ecrUsername,
 				SecretValue: ecrPassword,
 			})

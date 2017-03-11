@@ -4,6 +4,8 @@ import (
 	"encoding/base64"
 	"errors"
 	"fmt"
+	"log"
+	"net/http"
 	"net/url"
 	"os"
 	"strings"
@@ -28,29 +30,31 @@ func main() {
 		SecretKey: os.Getenv("CATTLE_SECRET_KEY"),
 	}
 
+	go healthcheck()
+
 	err := updateEcr(vargs)
 	if err != nil {
-		fmt.Printf("Error updating ECR, %s\n", err)
+		log.Printf("Error updating ECR, %s\n", err)
 	}
 	ticker := time.NewTicker(6 * time.Hour)
 	for {
 		<-ticker.C
 		err := updateEcr(vargs)
 		if err != nil {
-			fmt.Printf("Error updating ECR, %s\n", err)
+			log.Printf("Error updating ECR, %s\n", err)
 		}
 	}
 }
 
 func updateEcr(vargs Rancher) error {
-	fmt.Printf("Updating ECR Credentials\n")
+	log.Println("Updating ECR Credentials")
 	ecrClient := ecr.New(session.New())
 
 	resp, err := ecrClient.GetAuthorizationToken(&ecr.GetAuthorizationTokenInput{})
 	if err != nil {
 		return err
 	}
-	fmt.Printf("Returned from AWS GetAuthorizationToken call successfully\n")
+	log.Println("Returned from AWS GetAuthorizationToken call successfully")
 
 	if len(resp.AuthorizationData) < 1 {
 		return errors.New("Request did not return authorization data")
@@ -58,7 +62,7 @@ func updateEcr(vargs Rancher) error {
 
 	bytes, err := base64.StdEncoding.DecodeString(*resp.AuthorizationData[0].AuthorizationToken)
 	if err != nil {
-		fmt.Printf("Error decoding authorization token: %s\n", err)
+		log.Printf("Error decoding authorization token: %s\n", err)
 		return err
 	}
 	token := string(bytes[:len(bytes)])
@@ -70,7 +74,7 @@ func updateEcr(vargs Rancher) error {
 
 	registryURL, err := url.Parse(*resp.AuthorizationData[0].ProxyEndpoint)
 	if err != nil {
-		fmt.Printf("Error parsing registry URL: %s\n", err)
+		log.Printf("Error parsing registry URL: %s\n", err)
 		return err
 	}
 
@@ -84,19 +88,19 @@ func updateEcr(vargs Rancher) error {
 	})
 
 	if err != nil {
-		fmt.Printf("Failed to create rancher client: %s\n", err)
+		log.Printf("Failed to create rancher client: %s\n", err)
 		return err
 	}
 	registries, err := rancher.Registry.List(&client.ListOpts{})
 	if err != nil {
-		fmt.Printf("Failed to retrieve registries: %s\n", err)
+		log.Printf("Failed to retrieve registries: %s\n", err)
 		return err
 	}
-	fmt.Printf("Looking for configured registry for host %s\n", ecrURL)
+	log.Printf("Looking for configured registry for host %s\n", ecrURL)
 	for _, registry := range registries.Data {
 		serverAddress, err := url.Parse(registry.ServerAddress)
 		if err != nil {
-			fmt.Printf("Failed to parse configured registry URL %s\n", registry.ServerAddress)
+			log.Printf("Failed to parse configured registry URL %s\n", registry.ServerAddress)
 			break
 		}
 		registryHost := serverAddress.Host
@@ -110,11 +114,11 @@ func updateEcr(vargs Rancher) error {
 				},
 			})
 			if err != nil {
-				fmt.Printf("Failed to retrieved registry credentials for id: %s, %s\n", registry.Id, err)
+				log.Printf("Failed to retrieved registry credentials for id: %s, %s\n", registry.Id, err)
 				break
 			}
 			if len(credentials.Data) != 1 {
-				fmt.Printf("No credentials retrieved for registry: %s\n", registry.Id)
+				log.Printf("No credentials retrieved for registry: %s\n", registry.Id)
 				break
 			}
 			credential := credentials.Data[0]
@@ -123,13 +127,31 @@ func updateEcr(vargs Rancher) error {
 				SecretValue: ecrPassword,
 			})
 			if err != nil {
-				fmt.Printf("Failed to update registry credential %s, %s\n", credential.Id, err)
+				log.Printf("Failed to update registry credential %s, %s\n", credential.Id, err)
 			} else {
-				fmt.Printf("Successfully updated credentials %s for registry %s; registry address: %s\n", credential.Id, registry.Id, registryHost)
+				log.Printf("Successfully updated credentials %s for registry %s; registry address: %s\n", credential.Id, registry.Id, registryHost)
 			}
 			return nil
 		}
 	}
-	fmt.Printf("Failed to find configured registry to update for URL %s\n", ecrURL)
+	log.Printf("Failed to find configured registry to update for URL %s\n", ecrURL)
 	return nil
+}
+
+func healthcheck() {
+	listenPort := "8080"
+	p, ok := os.LookupEnv("LISTEN_PORT")
+	if ok {
+		listenPort = p
+	}
+	http.HandleFunc("/ping", ping)
+	log.Printf("Starting Healthcheck listener at :%s/ping\n", listenPort)
+	err := http.ListenAndServe(fmt.Sprintf(":%s", listenPort), nil)
+	if err != nil {
+		log.Fatal("Error creating health check listener: ", err)
+	}
+}
+
+func ping(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "pong!")
 }

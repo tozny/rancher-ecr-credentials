@@ -39,7 +39,7 @@ func main() {
 		SecretKey: r.SecretKey,
 	})
 	if err != nil {
-		log.Fatalf("Unable to create Rancher API client: %s\n", err)
+		log.Fatalf("[main] Unable to create Rancher API client: %s\n", err)
 	}
 	r.client = rancher
 
@@ -61,7 +61,7 @@ func (r *Rancher) updateEcr(
 	svc ecriface.ECRAPI,
 	registryClient client.RegistryOperations,
 	registryCredentialClient client.RegistryCredentialOperations) {
-	log.Println("Updating ECR Credentials")
+	log.Println("[main] Updating ECR Credentials")
 
 	request := &ecr.GetAuthorizationTokenInput{}
 	if len(r.RegistryIds) > 0 {
@@ -69,13 +69,13 @@ func (r *Rancher) updateEcr(
 	}
 	resp, err := svc.GetAuthorizationToken(request)
 	if err != nil {
-		log.Println(err)
+		log.Printf("[updateEcr] Error calling AWS API: %s\n", err)
 		return
 	}
-	log.Println("Returned from AWS GetAuthorizationToken call successfully")
+	log.Println("[updateEcr] Returned from AWS GetAuthorizationToken call successfully")
 
 	if len(resp.AuthorizationData) < 1 {
-		log.Println("Request did not return authorization data")
+		log.Println("[updateEcr] Request did not return authorization data")
 		return
 	}
 
@@ -91,59 +91,55 @@ func (r *Rancher) processToken(
 
 	bytes, err := base64.StdEncoding.DecodeString(*data.AuthorizationToken)
 	if err != nil {
-		log.Printf("Error decoding authorization token: %s\n", err)
+		log.Printf("[processToken %s] Error decoding authorization token: %s\n", *data.ProxyEndpoint, err)
 		return
 	}
 	token := string(bytes[:len(bytes)])
 
 	authTokens := strings.Split(token, ":")
 	if len(authTokens) != 2 {
-		log.Printf("Authorization token does not contain data in <user>:<password> format: %s\n", token)
+		log.Printf("[processToken %s] Authorization token does not contain data in <user>:<password> format: %s\n", *data.ProxyEndpoint, token)
 		return
 	}
 
 	registryURL, err := url.Parse(*data.ProxyEndpoint)
 	if err != nil {
-		log.Printf("Error parsing registry URL: %s\n", err)
+		log.Printf("[processToken %s] Error parsing registry URL: %s\n", *data.ProxyEndpoint, err)
 		return
 	}
 
 	ecrUsername := authTokens[0]
 	ecrPassword := authTokens[1]
-	ecrURL := registryURL.Host
+	ecrHost := registryURL.Host
 
-	if err != nil {
-		log.Printf("Failed to create rancher client: %s\n", err)
-		return
-	}
 	registries, err := registryClient.List(&client.ListOpts{})
 	if err != nil {
-		log.Printf("Failed to retrieve registries: %s\n", err)
+		log.Printf("[processToken %s] Failed to retrieve registries: %s\n", *data.ProxyEndpoint, err)
 		return
 	}
-	log.Printf("Looking for configured registry for host %s\n", ecrURL)
+	log.Printf("[processToken %s] Looking for configured registry for host: %s\n", *data.ProxyEndpoint, ecrHost)
 	for _, registry := range registries.Data {
 		serverAddress, err := url.Parse(registry.ServerAddress)
 		if err != nil {
-			log.Printf("Failed to parse configured registry URL %s\n", registry.ServerAddress)
+			log.Printf("[processToken %s] Failed to parse configured registry URL: %s\n", *data.ProxyEndpoint, registry.ServerAddress)
 			break
 		}
 		registryHost := serverAddress.Host
 		if registryHost == "" {
 			registryHost = serverAddress.Path
 		}
-		if registryHost == ecrURL {
+		if registryHost == ecrHost {
 			credentials, err := registryCredentialClient.List(&client.ListOpts{
 				Filters: map[string]interface{}{
 					"registryId": registry.Id,
 				},
 			})
 			if err != nil {
-				log.Printf("Failed to retrieved registry credentials for id: %s, %s\n", registry.Id, err)
+				log.Printf("[processToken %s] Failed to retrieved registry credentials for id: %s, %s\n", *data.ProxyEndpoint, registry.Id, err)
 				break
 			}
 			if len(credentials.Data) != 1 {
-				log.Printf("No credentials retrieved for registry: %s\n", registry.Id)
+				log.Printf("[processToken %s] No credentials retrieved for registry: %s\n", *data.ProxyEndpoint, registry.Id)
 				break
 			}
 			credential := credentials.Data[0]
@@ -152,14 +148,14 @@ func (r *Rancher) processToken(
 				SecretValue: ecrPassword,
 			})
 			if err != nil {
-				log.Printf("Failed to update registry credential %s, %s\n", credential.Id, err)
+				log.Printf("[processToken %s] Failed to update registry credential %s, %s\n", *data.ProxyEndpoint, credential.Id, err)
 			} else {
-				log.Printf("Successfully updated credentials %s for registry %s; registry address: %s\n", credential.Id, registry.Id, registryHost)
+				log.Printf("[processToken %s] Successfully updated credentials %s for registry %s; registry address: %s\n", *data.ProxyEndpoint, credential.Id, registry.Id, registryHost)
 			}
 			return
 		}
 	}
-	log.Printf("Failed to find configured registry to update for URL %s\n", ecrURL)
+	log.Printf("[processToken %s] Failed to find Rancher registry to update for ECR Host: %s\n", *data.ProxyEndpoint, ecrHost)
 	return
 }
 
@@ -170,10 +166,10 @@ func healthcheck() {
 		listenPort = p
 	}
 	http.HandleFunc("/ping", ping)
-	log.Printf("Starting Healthcheck listener at :%s/ping\n", listenPort)
+	log.Printf("[healthcheck] Starting Healthcheck listener at :%s/ping\n", listenPort)
 	err := http.ListenAndServe(fmt.Sprintf(":%s", listenPort), nil)
 	if err != nil {
-		log.Fatal("Error creating health check listener: ", err)
+		log.Fatal("[healthcheck] Error creating health check listener: ", err)
 	}
 }
 

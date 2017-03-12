@@ -43,7 +43,7 @@ func main() {
 	}
 	r.client = rancher
 
-	if ids, ok := os.LookupEnv("AWS_ECR_REGISTRY_IDS"); ok {
+	if ids, ok := os.LookupEnv("AWS_ECR_REGISTRY_IDS"); ok && ids != "" {
 		r.RegistryIds = strings.Split(ids, ",")
 	}
 

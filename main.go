@@ -12,6 +12,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/credentials/stscreds"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/ecr"
 	"github.com/aws/aws-sdk-go/service/ecr/ecriface"
@@ -58,11 +59,11 @@ func main() {
 
 	go healthcheck()
 
-	r.updateEcr(ecr.New(session.New()), r.client.Registry, r.client.RegistryCredential)
+	r.updateEcr(awsClient(), r.client.Registry, r.client.RegistryCredential)
 	ticker := time.NewTicker(6 * time.Hour)
 	for {
 		<-ticker.C
-		r.updateEcr(ecr.New(session.New()), r.client.Registry, r.client.RegistryCredential)
+		r.updateEcr(awsClient(), r.client.Registry, r.client.RegistryCredential)
 	}
 }
 
@@ -204,4 +205,20 @@ func healthcheck() {
 
 func ping(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "pong!")
+}
+
+func awsClient() *ecr.ECR {
+	roleArn, ok := os.LookupEnv("AWS_ROLE_ARN")
+	if ok {
+		log.Printf("[awsClient] Assuming Role: %s\n", roleArn)
+		return ecr.New(
+			session.New(
+				aws.NewConfig().WithCredentials(
+					stscreds.NewCredentials(session.New(), roleArn),
+				),
+			),
+		)
+	} else {
+		return ecr.New(session.New())
+	}
 }

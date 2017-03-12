@@ -5,6 +5,7 @@
 * Add HTTP healthcheck for container (default: :8080/ping, configurable with `LISTEN_PORT` envvar)
 * Support multiple ECR registries with `AWS_ECR_REGISTRY_IDS` envvar
 * Support auto creating ECR registry in Rancher using the `AUTO_CREATE` envvar (false by default)
+* Support Assuming IAM Roles using the `AWS_ROLE_ARN` envvar.
 
 ## v1.1.0 (2016/07/21)
 

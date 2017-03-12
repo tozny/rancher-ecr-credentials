@@ -54,5 +54,63 @@ func TestMain_basic(t *testing.T) {
 		PublicValue: "mockUser",
 		SecretValue: "mockPassword",
 	}).Return(&client.RegistryCredential{}, nil)
+
 	r.updateEcr(mockEcr, mockRegistry, mockRegistryCredential)
+
+	mockEcr.AssertExpectations(t)
+	mockRegistry.AssertExpectations(t)
+	mockRegistryCredential.AssertExpectations(t)
+}
+
+func TestMain_autoCreate(t *testing.T) {
+	r := &Rancher{
+		AutoCreate: true,
+	}
+	mockEcr := new(mocks.ECRAPI)
+	mockRegistry := new(mocks.RegistryOperations)
+	mockRegistryCredential := new(mocks.RegistryCredentialOperations)
+	mockEcr.On("GetAuthorizationToken", &ecr.GetAuthorizationTokenInput{}).Return(
+		&ecr.GetAuthorizationTokenOutput{
+			AuthorizationData: []*ecr.AuthorizationData{
+				&ecr.AuthorizationData{
+					ProxyEndpoint:      aws.String("https://012345678910.dkr.ecr.us-east-1.amazonaws.com"),
+					AuthorizationToken: aws.String(base64.StdEncoding.EncodeToString([]byte("mockUser:mockPassword"))),
+				},
+			},
+		}, nil)
+
+	mockRegistry.On("List", &client.ListOpts{}).Return(
+		&client.RegistryCollection{
+			Data: []client.Registry{},
+		},
+		nil,
+	)
+
+	mockRegistry.On("Create",
+		&client.Registry{
+			ServerAddress: "012345678910.dkr.ecr.us-east-1.amazonaws.com",
+		},
+	).Return(&client.Registry{
+		Resource: client.Resource{
+			Id: "1r1",
+		},
+		ServerAddress: "012345678910.dkr.ecr.us-east-1.amazonaws.com",
+	}, nil)
+
+	mockRegistryCredential.On("Create", &client.RegistryCredential{
+		RegistryId:  "1r1",
+		PublicValue: "mockUser",
+		SecretValue: "mockPassword",
+	}).Return(&client.RegistryCredential{
+		Resource:    client.Resource{Id: "1rc1"},
+		RegistryId:  "1r1",
+		PublicValue: "mockUser",
+		SecretValue: "mockPassword",
+	}, nil)
+
+	r.updateEcr(mockEcr, mockRegistry, mockRegistryCredential)
+
+	mockEcr.AssertExpectations(t)
+	mockRegistry.AssertExpectations(t)
+	mockRegistryCredential.AssertExpectations(t)
 }

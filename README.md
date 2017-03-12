@@ -40,6 +40,16 @@ These labels will cause Rancher to provision an API key for this service and
 create the `CATTLE_URL`, `CATTLE_ACCESS_KEY`, and `CATTLE_SECRET_KEY`
 environment variables.
 
+## Auto creating registry in Rancher
+
+This tool allows for automatically defining the ECR registry in Rancher by
+setting the `AUTO_CREATE` environment variable to `true`.
+When enabled, if the updater does not find an existing registry in Rancher
+for the ECR URL, then it will automatically create the registry with the
+proper credentials.
+Subsequent executions of the update will simply update the credentials in Rancher
+per normal operation.
+
 ## Configuring alternative ECR registries
 
 By default the updater will acquire login tokens for the default registry

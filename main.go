@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 
@@ -23,6 +24,7 @@ type Rancher struct {
 	AccessKey   string
 	SecretKey   string
 	RegistryIds []string
+	AutoCreate  bool
 	client      *client.RancherClient
 }
 
@@ -32,6 +34,13 @@ func main() {
 		AccessKey:   os.Getenv("CATTLE_ACCESS_KEY"),
 		SecretKey:   os.Getenv("CATTLE_SECRET_KEY"),
 		RegistryIds: []string{},
+	}
+	if val, ok := os.LookupEnv("AUTO_CREATE"); ok {
+		b, err := strconv.ParseBool(val)
+		if err != nil {
+			log.Fatalf("[main] Unable to parse boolean value from AUTO_CREATE: %s\n", err)
+		}
+		r.AutoCreate = b
 	}
 	rancher, err := client.NewRancherClient(&client.ClientOpts{
 		Url:       r.URL,
@@ -155,7 +164,27 @@ func (r *Rancher) processToken(
 			return
 		}
 	}
-	log.Printf("[processToken %s] Failed to find Rancher registry to update for ECR Host: %s\n", *data.ProxyEndpoint, ecrHost)
+	if r.AutoCreate {
+		log.Printf("[processToken %s] Automatically creating registry for host: %s\n", *data.ProxyEndpoint, ecrHost)
+		registry, err := registryClient.Create(&client.Registry{
+			ServerAddress: ecrHost,
+		})
+		if err != nil {
+			log.Printf("[processToken %s] Error creating registry for host: %s, %s\n", *data.ProxyEndpoint, ecrHost, err)
+			return
+		}
+		_, err = registryCredentialClient.Create(&client.RegistryCredential{
+			RegistryId:  registry.Id,
+			PublicValue: ecrUsername,
+			SecretValue: ecrPassword,
+		})
+		if err != nil {
+			log.Printf("[processToken %s] Error creating registry credential for host: %s, %s\n", *data.ProxyEndpoint, ecrHost, err)
+			return
+		}
+	} else {
+		log.Printf("[processToken %s] Failed to find Rancher registry to update for ECR Host: %s\n", *data.ProxyEndpoint, ecrHost)
+	}
 	return
 }
 

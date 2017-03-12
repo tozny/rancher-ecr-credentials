@@ -1,6 +1,6 @@
 # ChangeLog
 
-## v1.2.0 (Unreleased)
+## v1.2.0 (2017/03/12)
 
 * Add HTTP healthcheck for container (default: :8080/ping, configurable with `LISTEN_PORT` envvar)
 * Support multiple ECR registries with `AWS_ECR_REGISTRY_IDS` envvar

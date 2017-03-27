@@ -7,6 +7,8 @@
 This is a Docker container that when executed will update the Docker registry
 credentials in Rancher for an Amazon Elastic Container Registry.
 
+Originally contributed by John Engelman from [Object Partners](http://www.objectpartners.com). 
+
 ## Why is this needed?
 
 Because access to ECR is controlled with AWS IAM.

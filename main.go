@@ -26,6 +26,7 @@ type Rancher struct {
 	SecretKey   string
 	RegistryIds []string
 	AutoCreate  bool
+	ProxyHost   string
 	client      *client.RancherClient
 }
 
@@ -50,6 +51,7 @@ func main() {
 		AccessKey:   os.Getenv("CATTLE_ACCESS_KEY"),
 		SecretKey:   os.Getenv("CATTLE_SECRET_KEY"),
 		RegistryIds: []string{},
+		ProxyHost: 	 os.Getenv("ECR_PROXY_HOST"),
 	}
 	if val, ok := os.LookupEnv("AUTO_CREATE"); ok {
 		b, err := strconv.ParseBool(val)
@@ -140,7 +142,12 @@ func (r *Rancher) processToken(
 
 	ecrUsername := authTokens[0]
 	ecrPassword := authTokens[1]
-	ecrHost := registryURL.Host
+	ecrHost := ""
+	if len(r.ProxyHost) > 0 {
+		ecrHost = r.ProxyHost
+	} else {
+		ecrHost = registryURL.Host
+	}
 
 	registries, err := registryClient.List(&client.ListOpts{})
 	if err != nil {
@@ -157,6 +164,9 @@ func (r *Rancher) processToken(
 		registryHost := serverAddress.Host
 		if registryHost == "" {
 			registryHost = serverAddress.Path
+		}
+		if len(r.ProxyHost) > 0 {
+			registryHost = r.ProxyHost
 		}
 		if registryHost == ecrHost {
 			credentials, err := registryCredentialClient.List(&client.ListOpts{

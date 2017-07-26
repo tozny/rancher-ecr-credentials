@@ -165,9 +165,6 @@ func (r *Rancher) processToken(
 		if registryHost == "" {
 			registryHost = serverAddress.Path
 		}
-		if len(r.ProxyHost) > 0 {
-			registryHost = r.ProxyHost
-		}
 		if registryHost == ecrHost {
 			credentials, err := registryCredentialClient.List(&client.ListOpts{
 				Filters: map[string]interface{}{

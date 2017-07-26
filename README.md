@@ -39,6 +39,12 @@ These labels will cause Rancher to provision an API key for this service and
 create the `CATTLE_URL`, `CATTLE_ACCESS_KEY`, and `CATTLE_SECRET_KEY`
 environment variables.
 
+# ECR proxy compatibility
+
+If you would like to have a custom domain for your registry, such as `registry.example.com`, you can utilize our other project https://hub.docker.com/r/tozny/aws-ecr-proxy and this modified credential updater.
+
+Some functionality has been added to allow specifying `ECR_PROXY_HOST` in this service. This will allow creation of a registry and registry credentials in the Rancher API that is different than the default AWS ECR url. ECR login is done directly from the service to the AWS ECR url. The only time the `ECR_PROXY_HOST` is used is when modifying elements in the Rancher API.
+
 ## Auto creating registry in Rancher
 
 This tool allows for automatically defining the ECR registry in Rancher by
